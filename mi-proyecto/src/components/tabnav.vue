@@ -1,12 +1,8 @@
 <template>
   <div class="nav-container">
-    <!-- Header with logo -->
     <div class="header">
       <img src="/promiedos_logo.png" alt="Logo Promiedos" class="logo" />
-
     </div>
-    
-    <!-- Tab navigation -->
     <div class="tab-nav">
       <router-link 
         to="/tablas"

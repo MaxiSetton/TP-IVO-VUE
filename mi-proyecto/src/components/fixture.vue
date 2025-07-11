@@ -1,21 +1,18 @@
 <template>
   <div class="fixture-container">
-    <!-- Header -->
     <div class="fixture-header">
       <h2 class="header-title">Partidos futuros</h2>
     </div>
     
-    <!-- Matches list -->
-    <div class="matches-list">
+    <div class="lista-partidos">
       <div 
-        v-for="match in matches" 
-        :key="match.id"
-        class="match-row"
-        @click="selectMatch(match)"
+        v-for="partido in partidos" 
+        :key="partido.id"
+        class="partido-row"
       >
-        <span class="team home-team">{{ match.homeTeam }}</span>
+        <span class="equipo local">{{ partido.local }}</span>
         <span class="vs">vs</span>
-        <span class="team away-team">{{ match.awayTeam }}</span>
+        <span class="equipo visitante">{{ partido.visitante }}</span>
       </div>
     </div>
   </div>
@@ -24,21 +21,14 @@
 <script setup>
 import { ref } from 'vue'
 
-// Sample matches data - you can replace this with real data
-const matches = ref([
-  { id: 1, homeTeam: 'River', awayTeam: 'Boca' },
-  { id: 2, homeTeam: 'Racing', awayTeam: 'Ind' },
-  { id: 3, homeTeam: 'Slo', awayTeam: 'Hur' },
-  { id: 4, homeTeam: 'Tall', awayTeam: 'Bel' },
-  { id: 5, homeTeam: 'Tigre', awayTeam: 'Velez' },
-  { id: 6, homeTeam: 'River', awayTeam: 'Boca' }
+const partidos = ref([
+  { id: 1, local: 'River', visitante: 'Boca' },
+  { id: 2, local: 'Racing', visitante: 'Ind' },
+  { id: 3, local: 'Slo', visitante: 'Hur' },
+  { id: 4, local: 'Tall', visitante: 'Bel' },
+  { id: 5, local: 'Tigre', visitante: 'Velez' },
+  { id: 6, local: 'River', visitante: 'Boca' }
 ])
-
-// Function to handle match selection
-const selectMatch = (match) => {
-  console.log('Selected match:', match)
-  // You can emit an event or perform any action here
-}
 </script>
 
 <style scoped>
@@ -65,11 +55,11 @@ const selectMatch = (match) => {
   text-transform: uppercase;
 }
 
-.matches-list {
+.lista-partidos {
   padding: 0;
 }
 
-.match-row {
+.partido-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -80,26 +70,26 @@ const selectMatch = (match) => {
   transition: background-color 0.2s ease;
 }
 
-.match-row:hover {
+.partido-row:hover {
   background-color: #0E4230;
 }
 
-.match-row:last-child {
+.partido-row:last-child {
   border-bottom: none;
 }
 
-.team {
+.equipo {
   color: white;
   font-weight: 500;
   font-size: 14px;
   flex: 1;
 }
 
-.home-team {
+.local {
   text-align: left;
 }
 
-.away-team {
+.visitante {
   text-align: right;
 }
 
