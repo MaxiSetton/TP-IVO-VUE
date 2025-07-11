@@ -2,6 +2,8 @@
 import { ref } from 'vue'
 import tabnav from '../components/tabnav.vue'
 import tabla_normal from '../components/tabla_normal.vue'
+import fixture from '../components/fixture.vue'
+import publicidades from '../components/publicidades.vue'
 
 // DATOS DE LOS EQUIPOS
 const equipos = ref([
@@ -55,7 +57,10 @@ const equipos_tabla_anual = ref([
         </div>
         <div class="derecha">
           <div class="partidos-futuros">
-            <>
+            <fixture />
+          </div>
+          <div class="publicidades">
+            <publicidades />
           </div>
         </div>
       </div>
@@ -81,9 +86,10 @@ const equipos_tabla_anual = ref([
   display: flex;
   flex-direction: column;
   gap: 20px;
+  background-color: #0E4230
 }
 
-.tab-nav {
+.tabnav {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -93,30 +99,6 @@ const equipos_tabla_anual = ref([
   box-sizing: border-box;
 }
 
-.tab {
-  flex: 1;
-  text-align: center;
-  padding: 12px;
-  cursor: pointer;
-  font-weight: bold;
-  text-decoration: none;
-  font-size: 16px;
-  color: white;
-  border-bottom: 3px solid transparent;
-  transition: all 0.2s ease;
-}
-
-.tab.active {
-  background-color: #16A34A;
-  color: white;
-  font-size: 18px;
-  border-radius: 4px;
-}
-
-.tab.estadisticas {
-  background-color: #0A2B1D;
-  color: white;
-}
 
 .contenido {
   display: flex;
@@ -135,14 +117,4 @@ const equipos_tabla_anual = ref([
   flex: 3;
 }
 
-.tablas{
-  flex: 7;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.derecha{
-  flex: 3;
-}
 </style>

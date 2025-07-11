@@ -1,7 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-// en lugar de "const props = defineProps(...)"
 const { columnas, equipos, resaltarPosiciones = false } = defineProps({
   columnas: { type: Array, required: true },
   equipos:   { type: Array, required: true },
