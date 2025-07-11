@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import TabNav from '../components/tabnav.vue'
+import tabnav from '../components/tabnav.vue'
 import tabla_normal from '../components/tabla_normal.vue'
 
 // DATOS DE LOS EQUIPOS
@@ -45,28 +45,94 @@ const equipos_tabla_anual = ref([
 </script>
 
 <template>
-  <div class="container">
-    <div class="tablas">
-      <tabla_normal :columnas="columnas" :equipos="equipos" />
-      <tabla_normal :columnas="columnas" :equipos="equipos_tabla_anual" :resaltar-posiciones="true" />
-    </div>
-    <div class="derecha">
-      <div class="partidos-futuros">
-        <>
+  <div class="wrapper">
+    <div class="container">
+      <tabnav />
+      <div class="contenido">
+        <div class="tablas">
+          <tabla_normal :columnas="columnas" :equipos="equipos" />
+          <tabla_normal :columnas="columnas" :equipos="equipos_tabla_anual" :resaltar-posiciones="true" />
+        </div>
+        <div class="derecha">
+          <div class="partidos-futuros">
+            <>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
+
+
 <style scoped>
-.container{
-  height: 100%;
+.wrapper {
+  background-color: #0E4230;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+
+.container {
   width: 70%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.tab-nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  border-bottom: 2px solid #16A34A;
   background-color: #0E4230;
-  padding: 30px;
+  padding: 10px 0;
+  box-sizing: border-box;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 16px;
+  color: white;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.tab.active {
+  background-color: #16A34A;
+  color: white;
+  font-size: 18px;
+  border-radius: 4px;
+}
+
+.tab.estadisticas {
+  background-color: #0A2B1D;
+  color: white;
+}
+
+.contenido {
+  display: flex;
+  flex-direction: row;
   gap: 40px;
+}
+
+.tablas {
+  flex: 7;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.derecha {
+  flex: 3;
 }
 
 .tablas{

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TabNav />
+    <tabnav />
     <h2 style="color: white">Acá van las estadísticas</h2>
   </div>
 </template>
