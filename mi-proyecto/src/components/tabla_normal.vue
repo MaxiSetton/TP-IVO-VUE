@@ -2,23 +2,29 @@
 import { ref, computed } from 'vue'
 
 // en lugar de "const props = defineProps(...)"
-const { columnas, equipos } = defineProps({
+const { columnas, equipos, resaltarPosiciones = false } = defineProps({
   columnas: { type: Array, required: true },
-  equipos:   { type: Array, required: true }
+  equipos:   { type: Array, required: true },
+  resaltarPosiciones: { type: Boolean, default: false }
 })
+
 const getCellValue = (equipo, key, idx) => {
   return key === 'position'
     ? idx + 1
     : equipo[key]
+}
+const getClass = (pos) => {
+  if (pos <= 3) return 'libertadores'
+  if (pos <= 6) return 'sudamericana'
+  if (pos === 10) return 'descenso'
+  return ''
 }
 
 </script>
 
 <template>
   <div class="container">
-    <!-- TABLA -->
     <table class="tabla">
-      <!-- CABECERA -->
       <thead>
         <tr class="cabecera">
           <th v-for="col in columnas" :key="col.key">
@@ -27,14 +33,17 @@ const getCellValue = (equipo, key, idx) => {
         </tr>
       </thead>
       
-      <!-- FILAS DE EQUIPOS -->
       <tbody>
         <tr 
           v-for="(equipo, index) in equipos" 
           :key="equipo.id"
           class="fila-equipo"
         >
-          <td v-for="col in columnas" :key="col.key">
+          <td 
+            v-for="col in columnas" 
+            :key="col.key"
+            :class="resaltarPosiciones && col.key === 'position' ? getClass(index + 1) : ''"
+          >
             {{ getCellValue(equipo, col.key, index) }}
           </td>
         </tr>
@@ -44,7 +53,7 @@ const getCellValue = (equipo, key, idx) => {
 </template>
 
 <style>
-/* CONTENEDOR PRINCIPAL */
+
 .container {
   max-width: 800px;
   margin: 0 auto;
@@ -52,7 +61,6 @@ const getCellValue = (equipo, key, idx) => {
   background: #0A2B1D;
 }
 
-/* TABLA COMPLETA */
 .tabla {
   width: 100%;
   border-collapse: separate;
@@ -62,8 +70,6 @@ const getCellValue = (equipo, key, idx) => {
   overflow: hidden;            
 }
 
-
-/* CABECERA */
 .cabecera {
   background-color: #16A34A;
 }
@@ -76,7 +82,6 @@ const getCellValue = (equipo, key, idx) => {
   border: none;
 }
 
-/* FILAS DE LOS EQUIPOS */
 .fila-equipo {
   background-color: #0A2B1E;
 }
@@ -88,8 +93,22 @@ const getCellValue = (equipo, key, idx) => {
   border: 1px solid #16A34A;
 }
 
-/* cuando pasa el mouse por encima */
-.fila-equipo:hover {
-  background-color: #0F3D2A;
+.libertadores {
+  background-color: #4caf50;
+  color: white;
+  padding: 4px;
+  border-radius: 4px;
+}
+.sudamericana {
+  background-color: #ffc107;
+  color: black;
+  padding: 4px;
+  border-radius: 4px;
+}
+.descenso {
+  background-color: #f44336;
+  color: white;
+  padding: 4px;
+  border-radius: 4px;
 }
 </style>
